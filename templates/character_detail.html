@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>{{ char.name }}</title>
+    	<meta charset="utf-8" dir="rtl" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/main.css' ) }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/noscript.css' ) }}" /></noscript>
+
+{% endblock %}
+
+{% block body %}
+<section class="simple-box">
+    <h2>{{ char.name }}</h2>
+    <img src="{{ url_for('static' , filename = char.image_full) }}" style="max-width: 400px;">
+    <p>{{ char.desc }}</p>
+    <a href="{{ url_for('general.main') }}">بازگشت</a>
+    </section>
+
+    	<script src="{{ url_for('static' , filename = 'assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/main.js') }}"></script>
+
+        
+{% endblock %}

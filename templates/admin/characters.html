@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>مدیریت شخصیت ها</title>
+{% endblock %}
+
+{% block body %}
+    <h2> مدیریت شخصیت ها</h2>
+    <a href="{{ url_for('admin.new_character') }}">اضافه کردن شخصیت جدید</a>
+    <hr>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 15px;">
+        {% for c in chars %}
+        <div style="border: 1px solid #ccc; padding: 10px;">
+            <img src="{{ url_for('static' , filename = c.image_thumb) }}" style="width: 100%;">
+            <h4>{{ c.name }}</h4>
+            <p>{{ c.desc[:60] }}</p>
+            <form method="post" action="{{ url_for('admin.delete_character' , char_id = c.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button type="submit" onclick="return confirm('مطمئنی حذفش کنم؟')">حذف</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

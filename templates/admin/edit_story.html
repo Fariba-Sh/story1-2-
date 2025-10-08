@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>ویرایش داستان</title>
+{% endblock %}
+
+{% block body %}
+<h2>ویرایش داستان</h2>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <input type="text" name="title" value="{{ story.title }}" placeholder="عنوان"><br>
+    <textarea name="desc">{{ story.desc }}</textarea><br>
+    <button type="submit">ثبت تغییرات</button>
+</form>
+
+{% endblock %}

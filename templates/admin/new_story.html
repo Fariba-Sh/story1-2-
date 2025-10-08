@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>اضافه کردن داستان</title>
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="text" name="title" placeholder="عنوان داستان">
+        <textarea name="desc" placeholder="توضیح کوتاه" ></textarea>
+        <button type="submit">ثبت</button>
+{% endblock %}

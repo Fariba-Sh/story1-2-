@@ -1,0 +1,7 @@
+
+SQLALCHEMY_DATABASE_URI = "sqlite:///database.db"
+SECRET_KEY = "CBHDJSVBFCYUEDFDRWEUDTWQDKBKkguystuitxiud7suyh873734e53647twuqiedkjuyc7cfg2qT$$$$$#%&^^^*"
+
+
+ADMIN_USERNAME = "fari"
+ADMIN_PASSWORD = "1234"

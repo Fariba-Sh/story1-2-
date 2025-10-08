@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>ویرایش قسمت</title>
+{% endblock %}
+
+{% block body %}
+<h2>ویرایش قسمت</h2>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <input type="text" name="title" value="{{ part.title }}" placeholder="عنوان"><br>
+    <textarea name="content">{{ part.content }}</textarea><br>
+    <button type="submit">ثبت تغییرات</button>
+</form>
+
+{% endblock %}

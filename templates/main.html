@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<title>داستان</title>
+		<meta charset="utf-8" dir="rtl" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/main.css' ) }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/noscript.css' ) }}" /></noscript>
+
+{% endblock %}
+{% block body %}
+<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+				<!-- One -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>داستان فرعی(بی اسم)</h1>
+							<p class="major">این یکی از داستانهای آتنا و فریباست که <strong >شاید</strong> ادامه بدن.</p>
+							{% if stories %}
+							<ul class="actions stacked">
+								{% for story in stories %}
+								<li><a href="{{ url_for('general.story_detail' , slug = story.slug) }}" class="button big wide smooth-scroll-middle">{{ story.title }}</a></li>
+								{% endfor %}
+							</ul>
+							{% else %}
+							<p>هنوز هیچ داستانی اضافه نشده</p>
+							{% endif %}
+						</div>
+						<div class="image">
+							<img src="{{ url_for('static' , filename = 'images/banner.jpg') }}" alt="" />
+						</div>
+					</section>
+
+				<!-- Two -->
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+						<div class="content">
+							<section class="simple-box" >
+                                <section class="question-box" >
+                                    <h4>این سایت چه کمکی به من میکنه؟</h4>
+                                    <p>این سوال همونقدر احمقانست که بگی اینستا چه کمکی بهم میکنه ولی خب جوابشو میدم، گذروندن وقت</p>
+                                </section>
+                                <section class="question-box" >
+                                    <h4>چرا باید این سایتو انتخاب کنم؟</h4>
+                                    <p>چون از حق نگذریم خوب مینویسیم</p>
+                                </section>
+                                <section class="question-box" >
+                                    <h4>میتونیم خودمون هم توی نوشتن داستان نقشی داشته باشیم؟ </h4>
+                                    <p>صد البته!البته هنوز این بخشو نساختم بعدا تو اپدیتای بعدی شاید</p>
+  
+                                </section>
+                            </section>
+						</div>
+						<div class="image">
+							<img src="{{ url_for('static' , filename = 'images/spotlight01.jpg') }}" alt="" />
+						</div>
+					</section>
+
+				
+
+				<!-- Five -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>شخصیت ها</h2>
+							<p>در این پنل میتونی شخصیت هارو ببینی اگه اطلاعات بیشتر میخوای روشون کلیک کن</p>
+						</div>
+
+						<!-- Gallery -->
+							<div class="gallery style2 medium lightbox onscroll-fade-in">
+								{% for c in characters %}
+								<article>
+									<a href="{{ url_for('static' , filename = c.image_full) }}" class="image">
+										<img src="{{ url_for('static' , filename = c.image_thumb) }}" alt="{{ c.name }}">
+									</a>
+									<div class="caption">
+										<h3>{{ c.name }}</h3>
+										<p>{{ c.desc[:100] }}</p>
+										<ul class="actions fixed">
+											<li><a href="{{ url_for('general.character_detail' , slug = c.slug) }}" class="button small">جزئیات بیشتر</a></li>
+										</ul>
+									</div>
+								</article>
+							    {% endfor %}
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/main.js') }}"></script>
+
+	</body>
+
+
+{% endblock %}

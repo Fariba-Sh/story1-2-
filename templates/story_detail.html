@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>{{ story.title }}</title>
+      <meta charset="utf-8" dir="rtl" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/main.css' ) }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static' , filename = 'assets/css/noscript.css' ) }}" /></noscript>
+
+{% endblock %}
+
+{% block body %}
+<section class="simple-box">
+    <h2>{{ story.title }}</h2>
+    <p>{{ story.desc }}</p>
+
+    <h3>قسمت ها :</h3>
+    <ul>
+        {% for part in story.parts %}
+                <a href="{{ url_for('general.story_part' , slug = story.slug , part_id = part.id) }}">{{ part.title }}</a> <br>
+        {% else %}
+            <li>هیچ قسمتی نوشته نشده</li>
+        {% endfor %}
+    </ul>
+</section>
+    <script src="{{ url_for('static' , filename = 'assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static' , filename = 'assets/js/main.js') }}"></script>
+{% endblock %}

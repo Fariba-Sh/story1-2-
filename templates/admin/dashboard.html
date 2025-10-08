@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>پنل ادمین</title>
+{% endblock %}
+
+{% block body %}
+<h2>اضافه کردن داستان جدید</h2>
+    <form method="post" action="{{ url_for('admin.new_story') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="text" name="title" placeholder="عنوان داستان">
+        <textarea name="desc" placeholder="توضیح کوتاه" ></textarea>
+        <button type="submit">ثبت</button>
+    </form>
+    <hr>
+
+    <h2>اضافه کردن قسمت جدید به داستان</h2>
+
+    <form method="post" >
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <select name="story_id" id="story-select" required>
+            <option value="">انتخاب داستان ...</option>
+            {% for story in stories %}
+            <option value="{{ story.id }}">{{ story.title }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="title" placeholder="عنوان قسمت">
+        <textarea name="content" placeholder="متن قسمت" ></textarea>
+        <button type="submit" id="add-part-btn">ثبت</button>
+    </form>
+
+
+    {% for story in stories %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+        <h3>{{ story.title }}</h3>
+        <p>{{ story.desc }}</p>
+
+        <a href="{{ url_for('admin.edit_story' , story_id = story.id) }}">ویرایش داستان</a> |
+        <form method="post" action="{{ url_for('admin.delete_story' , story_id = story.id) }}" style="display: inline;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="submit" onclick="return confirm('از حذف داستان مطمئنی؟')">حذف داستان</button>
+        </form>
+
+        <h4>قسمت ها :</h4>
+        <ul>
+            {% for part in story.parts %}
+            <li>
+                {{ part.title }}
+                <a href="{{ url_for('admin.edit_part' , part_id = part.id) }}">ویرایش</a>
+                <form method="post" action="{{ url_for('admin.delete_part' , part_id = part.id) }}" style="display: inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" onclick="return confirm('قسمت حذف بشه؟')">حذف قسمت</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+
+
+    <script>
+        const form = document.querySelector('form[method ="post"]:last-of-type');
+        const btn = document.getElementById('add-part-btn');
+        form.addEventListener('submit' , function(e){
+            e.preventDefault();
+            const storyId = document.getElementById('story-select').value;
+            if(!storyId) return alert("لطفا داستان را انتخاب کنید");
+            form.action = `/admin/new-part/${storyId}`;
+            form.submit();
+        });
+    </script>
+{% endblock %}

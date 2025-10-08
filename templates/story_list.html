@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>داستان ها </title>
+{% endblock %}
+
+{% block body %}
+    <h2>داستان ها</h2>
+    <ul>
+        {% for story in stories %}
+            <li>
+                <a href="{{ url_for('general.story_detail' , slug = story.slug) }}">{{ story.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
